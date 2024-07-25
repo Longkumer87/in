@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding:0;
+    
+}
+
+.bg{
+    background:#c5d7de;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.img-fluid{
+    height: 400px;
+}
+
+.table{
+    background-color: orangered;
+}
+
+.footer{
+    margin-top: auto;
+}
+.err{
+    font-size: 20px;
+    color: aqua;
+}
+
+
+/* #c5d7de */
