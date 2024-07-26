@@ -6,13 +6,6 @@ $userAdmin = isAdmin();
 $db = new Database();
 $conn = $db->getDb();
 
-
-if(!isset($_SESSION['userName'])){
-    $error_message = "incorrect user";
-    exit;
-}else{
-  $userName = htmlspecialchars(strtoupper($_SESSION['userName']));
-}
 ?>
 
 <?php $title = "admin";
@@ -20,7 +13,7 @@ include 'includes/header.php' ?>
 <?php include 'includes/navbar.php' ?>
 
 <div>
-  <h2 class="text-center fs-1 fw-bold mt-3" style="color:#6D214F;"> ADMIN <?=$userName;?></h2>
+  <h2 class="text-center fs-1 fw-bold mt-3" style="color:#6D214F;"> ADMIN </h2>
 </div>
 
 <div class="container mt-3">

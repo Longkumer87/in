@@ -1,21 +1,27 @@
 <?php
 require 'classes/Database.php';
-require 'classes/Pagination.php';
+require 'classes/Ipaddress.php';
 require 'includes/function.php';
 
 $admin = isAdmin();
 $db = new Database();
 $conn = $db->getDb();
-$slno = 1;
 
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+  $page = (int) $_GET['page'];
+} else {
+  $page = 1;
+}
+$limit = 8;
+$offset = ($page - 1) * $limit;
 
-$sqlIp = "SELECT `items`.`ipAddress`, `items`.`particularsTo`
-          FROM `items` 
-          ORDER BY INET_ATON(`items`.`ipAddress`) ASC";
-          
-$stmtIp = $conn->prepare($sqlIp);
-$stmtIp->execute();
-$ipAddresses =$stmtIp->fetchAll(PDO::FETCH_ASSOC);
+//class to get and display IP-Address
+$ipAddresses = Ipaddress::getIp($conn, $limit, $offset);
+
+//class to get total number of ip address
+$totalIpPage = Ipaddress::getTotalIp($conn, $limit);
+
+$slno = $offset + 1;
 
 ?>
 
@@ -36,13 +42,13 @@ include 'includes/header.php' ?>
       </thead>
       <tbody class="table">
         <?php foreach ($ipAddresses as $ipAdd): ?>
-          <?php if(!empty($ipAdd['ipAddress'])):?>
-          <tr>
-            <th scope="row"><?= $slno++ ?></th>
-            <td><?= $ipAdd['ipAddress']; ?></td>
-            <td><?= $ipAdd['particularsTo']; ?></td>
-          </tr>
-          <?php endif;?>
+          <?php if (!empty($ipAdd['ipAddress'])): ?>
+            <tr>
+              <th scope="row"><?= $slno++ ?></th>
+              <td><?= $ipAdd['ipAddress']; ?></td>
+              <td><?= $ipAdd['particularsTo']; ?></td>
+            </tr>
+          <?php endif; ?>
         <?php endforeach; ?>
       </tbody>
     </table>
@@ -50,10 +56,22 @@ include 'includes/header.php' ?>
 <?php endif; ?>
 
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  <ul class="pagination justify-content-center mt-3">
+    <?php if ($page > 1): ?>
+      <li class="page-item">
+        <a class="page-link" href="?page=<?=$page - 1; ?>">Previous</a>
+      </li>
+    <?php endif; ?>
+
+     <?php for($i=1; $i<$page; $i++):?> 
+    <li class="page-item<?=$i==$page?'active':''?>">
+    <a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a>
+    </li>
+    <?php endfor;?>
+
+    <?php if ($page < $totalIpPage): ?>
+      <li class="page-item"><a class="page-link" href="?page=<?= $page + 1; ?>">Next</a></li>
+    <?php endif; ?>
   </ul>
 </nav>
 

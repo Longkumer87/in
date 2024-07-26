@@ -2,6 +2,13 @@
 
    if(isset($_SESSION['is_logged_in'])&& $_SESSION['is_logged_in']== true){
 
+    if(!isset($_SESSION['userName'])){
+      $error_message = "incorrect user";
+      exit;
+  }else{
+    $userName = htmlspecialchars(strtoupper($_SESSION['userName']));
+  }
+
     $loggedIn = true;
   }else {
     $loggedIn = false;
@@ -44,8 +51,9 @@
           </ul>
         </li>
       </ul>
+      <span class="text-light fst-italic fs-5"><?=$userName;?></span>
       <form class="d-flex" action="logout.php">
-        <input type="submit" class="btn btn-outline-danger mx-2" name="logout" value="Logout">
+        <input type="submit" class="btn btn-outline-light mx-2" name="logout" value="Logout">
       </form>
     </div>
   </div>

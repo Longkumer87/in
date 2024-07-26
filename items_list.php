@@ -2,7 +2,6 @@
 require 'classes/Database.php';
 require 'classes/Category.php';
 require 'classes/Item.php';
-require 'classes/Pagination.php';
 require 'includes/function.php';
 
 $admin = isAdmin();
@@ -122,7 +121,7 @@ include 'includes/header.php' ?>
     <!----------- Page number ------------->
     <?php for ($i = 1; $i < $page; $i++): ?>
       <li class="page-item<?=$i==$page? 'active' :''; ?>">
-        <a class="page-link" href="?page<?=$i;?>"><?=$i;?></a>
+        <a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a>
       </li>
     <?php endfor; ?>
     <!--------------- Next --------------->

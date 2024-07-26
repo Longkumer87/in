@@ -137,9 +137,10 @@ include 'includes/header.php';
     <?php if ($page > 1): ?>
       <li class="page-item"><a class="page-link" href="?page=<?= $page - 1; ?>">Previous</a></li>
     <?php endif; ?>
-    <?php for ($i = 1; $i < $totalCatPages; $i++): ?>
-      <li class="page-item<?= $i == $page ? 'active' : ''; ?>">
-        <a class="page-link" href="?page=<?=$i; ?>"><?=$i; ?></a>
+    <?php for ($i = 1; $i < $page; $i++): ?>
+      <li class="page-item<?=$i==$page? 'active' :''; ?>">
+        <a class="page-link" href="?page=<?=$i;?>"><?=$i; ?></a>
+      </li>
       </li>
     <?php endfor; ?>
 
