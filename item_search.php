@@ -68,6 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <span class="fs-2 fw-bold ">ITEM LIST</span>
     </div>
     <div class="col-4">
+    <div class="col">
+      <div class="container text-center">
+      <a class="btn btn-sm btn-outline-danger" href="export/csv_data.php" role="button">csv</a>
+      <a class="btn btn-outline-secondary btn-sm " href="export/excel_data.php" role="button">excel</a>
+      </div>
+    </div>
     </div>
 </div>
 

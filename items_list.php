@@ -53,6 +53,10 @@ include 'includes/header.php' ?>
       </div>
     </div>
     <div class="col">
+      <div class="container text-center">
+      <a class="btn btn-sm btn-outline-danger" href="export/csv_data.php" role="button">csv</a>
+      <a class="btn btn-outline-secondary btn-sm " href="export/excel_data.php" role="button">excel</a>
+      </div>
     </div>
   </div>
 
@@ -120,12 +124,12 @@ include 'includes/header.php' ?>
     <?php endif; ?>
     <!----------- Page number ------------->
     <?php for ($i = 1; $i < $page; $i++): ?>
-      <li class="page-item<?=$i==$page? 'active' :''; ?>">
+      <li class="page-item<?=$i==$page? 'active' : ''; ?>">
         <a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a>
       </li>
     <?php endfor; ?>
     <!--------------- Next --------------->
-    <?php if($page < $totalPages):?>
+    <?php if($page <= $totalPages):?>
     <li class="page-item">
       <a class="page-link" href="?page=<?=$page+1;?>">Next</a>
     </li>
